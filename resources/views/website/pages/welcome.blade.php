@@ -1,15 +1,15 @@
 @extends('website.layout.layout')
 @section('content')
 <div class="px-4  my-5 text-center border-bottom firstSection">
-    <img src="{{ url('/imgs/logo.png') }}" style="width: autp; height:150px" />
+    <img src="{{ url('/imgs/logo.png') }}" style="width: autp; height:100px" />
     <h1 class="display-4 fw-bold">Refaat Photography</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">
         Newborn photography is the most difficult photography and we have got the right mindset, skills, and experience to handle the baby with utmost hygiene care and love.
       </p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Explore My Work</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Login</button>
+        <a type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Explore My Work On Instagram</a>
+        <a href="{{ url('/login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
       </div>
     </div>
     <div class="overflow-hidden" style="max-height: 45vh;">
