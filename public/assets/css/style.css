@@ -1,0 +1,29 @@
+.navbar {
+    background-color: #534733 !important;
+}
+.btn-primary {
+    background-color: #534733;
+    border-color: #534733;
+}
+
+.btn-primary:hover {
+    background-color: #534733;
+    border-color: #534733;
+    opacity: .9;
+}
+
+.font-heading {
+    font-size: 72px;
+}
+.mainColor {
+    color: #534733;
+}
+
+.card {
+    height: 330px;
+}
+
+.card .card-img-top{
+    width: auto;
+    height: 330px;
+}
