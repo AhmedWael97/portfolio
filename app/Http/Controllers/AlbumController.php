@@ -23,23 +23,32 @@ class AlbumController extends Controller
     }
 
     public function store(Request $request) {
+
+
+
         $request->validate([
             'name' => 'required',
-          
+
         ]);
         $newAlbum = new Album($request->all());
 
         $newAlbum->save();
 
         if($request->has('images') && count($request->images) >= 1) {
+            $drive  = new \App\Http\Controllers\GoogleDriveController();
+            $folder = $drive->createFolder($request->name);
             foreach ($request->file('images') as $imagefile) {
+
+               $url = $drive->uploadFileUsingAccessToken($folder, $imagefile);
+
                 $albumImage = new AlbumImage();
-                $imageName = time().'-'.$imagefile->getClientOriginalName();
-                $imagefile->move(public_path('albums'), $imageName);
-                $albumImage->photo = URL::asset('/albums').'/'.$imageName;
+                $albumImage->photo = $url;
                 $albumImage->album_id = $newAlbum->id;
-                $albumImage->base_64 = 'data:image/' . $imagefile->getClientOriginalExtension() . ';base64,' . base64_encode(URL::asset('/albums').'/'.$imageName);
+                $albumImage->base_64 = '';
                 $albumImage->save();
+
+
+
             }
         }
 
@@ -48,7 +57,7 @@ class AlbumController extends Controller
 
     public function view($id,$user_id) {
         $images = AlbumImage::where('album_id',$id)->get();
-        return view('dashboard.albums.view')->with([ 
+        return view('dashboard.albums.view')->with([
             'images' => $images,
             'user' => User::where('id',$user_id)->first(),
             ]);
@@ -67,6 +76,6 @@ class AlbumController extends Controller
     }
     // public function update() {
 
-    // } 
+    // }
 
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ Route::get('/', function () {
     return view('website.pages.welcome');
 });
 
-Route::get('/login',function() {
+Route::get('/web-login',function() {
     return view('website.pages.login');
 });
 
@@ -49,7 +50,11 @@ Route::get('/logout',function() {
     return redirect('/');
 });
 
-Auth::routes();
+ Auth::routes();
+
+Route::get('/dashboard-login',function() {
+    return view('auth.login');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -68,7 +73,29 @@ Route::prefix('/admin/dashboard')->group(function($router){
    Route::get('/album-view/{id}/{user_id}','App\Http\Controllers\AlbumController@view')->name('album-view');
 //    Route::post('/album-update','App\Http\Controllers\AlbumController@update')->name('album-update');
    Route::get('/album-delete/{id}','App\Http\Controllers\AlbumController@destroy')->name('album-delete');
-  
+});
+Route::get('/glogin','\App\Http\Controllers\GoogleDriveController@googleLogin')->name('glogin');
+Route::post('/upload-file','\App\Http\Controllers\GoogleDriveController@uploadFileUsingAccessToken');
+
+
+Route::get('/download-album/{id}',function($id) {
+    $album = \App\Models\AlbumImage::where('album_id',$id)->get();
+    foreach($album as $image) {
+        $filename = rand(1,111111111).'.jpg';
+        $tempImage = tempnam(sys_get_temp_dir(), $filename);
+        copy($image->photo, $tempImage);
+
+        return response()->download($tempImage, $filename);
+    }
+    return back();
 });
 
+Route::get('/getAlbumImages/{id}',function($id) {
+    return \App\Models\AlbumImage::where('album_id',$id)->select('id')->get()->pluck('id');
+});
 
+Route::get('/download-image/{id}',function($id) {
+
+   $image = \App\Models\AlbumImage::findOrFail($id);
+   return $image->photo;
+});

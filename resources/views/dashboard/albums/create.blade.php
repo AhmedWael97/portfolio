@@ -15,7 +15,11 @@
                 <form action="{{ route('album-store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                
+                        <div class="col-12">
+                            <a href="{{ url('/glogin') }}">
+                                Sign In With Google Account
+                            </a>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group" data-select2-id="62">
                                 <label>Client Name</label>
@@ -46,7 +50,7 @@
                                 value="{{ old('images') }}" multiple>
                         </div>
 
-      
+
                     </div>
                     <button class="btn btn-danger " type="submit"> <i class="fas fa-camera-retro"></i> Upload Album</button>
                 </form>
