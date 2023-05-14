@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Http;
 */
 
 Route::get('/', function () {
-    return view('website.pages.welcome');
+    $previous_work = App\Models\previous_work::take(8)->get();
+    $latest_work = App\Models\latest_project::take(8)->get();
+    return view('website.pages.welcome')->with(
+        ['previous_works' => $previous_work , 'latest_works' => $latest_work]
+    );
 });
 
 Route::get('/web-login',function() {
@@ -79,6 +83,15 @@ Route::prefix('/admin/dashboard')->group(function($router){
    Route::get('/album-view/{id}/{user_id}','App\Http\Controllers\AlbumController@view')->name('album-view');
 //    Route::post('/album-update','App\Http\Controllers\AlbumController@update')->name('album-update');
    Route::get('/album-delete/{id}','App\Http\Controllers\AlbumController@destroy')->name('album-delete');
+
+   //Muhamed fawzy 14-5-2023
+   Route::get('/latest-project-images' , 'App\Http\Controllers\LatestProjectController@index')->name('latest-project-images');
+   Route::post('/save-latest-images' ,'App\Http\Controllers\LatestProjectController@store')->name('save-latest-image');
+   Route::get('/delete-latest-image/{id}' ,'App\Http\Controllers\LatestProjectController@delete')->name('delete-latest-project');
+
+   Route::get('/previous-work-images' , 'App\Http\Controllers\PreviousWorkController@index')->name('previous-work-images');
+   Route::post('/save-previous-work' ,'App\Http\Controllers\PreviousWorkController@store')->name('save-previous-work');
+   Route::get('/delete-previous-work/{id}' ,'App\Http\Controllers\PreviousWorkController@delete')->name('delete-previous-work');
 });
 Route::get('/glogin','\App\Http\Controllers\GoogleDriveController@googleLogin')->name('glogin');
 Route::post('/upload-file','\App\Http\Controllers\GoogleDriveController@uploadFileUsingAccessToken');

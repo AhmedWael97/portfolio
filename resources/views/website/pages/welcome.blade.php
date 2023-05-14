@@ -23,24 +23,24 @@
     </div>
 </div>
 <div class="secondSection mt-3 mb-3 text-center">
-    <h1 class="mb-4 font-heading"> My Previous <span class="mainColor">Work</span> </h1>
+    <h1 class="mb-4 font-heading" style="font-family: 'Kaushan Script', cursive;"> My Previous <span class="mainColor">Work</span> </h1>
 
     <div class="mt-4">
         <div class="row p-0 m-0">
-            @for($x=0;$x<8 ;$x++)
+               @foreach($previous_works as $previous_work)
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <img src="{{ url('/imgs/example.jpg') }}" class="card-img-top shadow-sm" alt="...">
+                        <img src="{{ $previous_work->image}}" class="card-img-top shadow-sm" alt="...">
                     </div>
                 </div>
-            @endfor
+               @endforeach
         </div>
     </div>
 </div>
 <div class="thirdSection">
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold">About Me</h1>
+          <h1 class="display-5 fw-bold"  style="font-family: 'Kaushan Script', cursive;">About Me</h1>
           <p class="col-md-8 fs-4">
             Hi everyone! I am so glad you stopped by to find out more about me and my work!
           </p>
@@ -49,17 +49,18 @@
       </div>
 </div>
 <div class="secondSection mt-3 mb-3 text-center">
-    <h1 class="mb-4 font-heading"> Latest  <span class="mainColor">Projects</span> </h1>
+    <h1 class="mb-4 font-heading"  style="font-family: 'Kaushan Script', cursive;"> Latest  <span class="mainColor">Projects</span> </h1>
 
     <div class="mt-4">
         <div class="row p-0 m-0">
-            @for($x=0;$x<8 ;$x++)
+               @foreach($latest_works as $latest_work)
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <img src="{{ url('/imgs/example.jpg') }}" class="card-img-top shadow-sm" alt="...">
+                        <img src="{{ $latest_work->image}}" class="card-img-top shadow-sm" alt="...">
                     </div>
                 </div>
-            @endfor
+               @endforeach
+          
         </div>
     </div>
 </div>

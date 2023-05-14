@@ -222,6 +222,37 @@
               </p>
             </a>
           </li>
+
+           <li class="nav-item">
+            <a href="{{route('latest-project-images')}}" class="nav-link">
+            <i class="nav-icon fas fa-camera-retro"></i>
+              <p>
+                Latest Project Images
+                <span class="badge badge-info right">
+                <?php   
+                $images_no = count(\App\Models\latest_project::get());
+                ?>
+                {{$images_no}}
+                </span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('previous-work-images')}}" class="nav-link">
+            <i class="nav-icon fas fa-camera-retro"></i>
+              <p>
+                Previous Works Images
+                <span class="badge badge-info right">
+                <?php   
+                $images_no = count(\App\Models\previous_work::get());
+                ?>
+                {{$images_no}}
+                </span>
+              </p>
+            </a>
+          </li>
+         
          
           <li class="nav-item">
             <a href="calendar.html" class="nav-link">
