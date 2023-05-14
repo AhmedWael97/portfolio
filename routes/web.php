@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/web-login',function() {
+    if(Auth::check()) {
+        return redirect('/profile');
+    }
     return view('website.pages.login');
 });
 
@@ -53,6 +56,9 @@ Route::get('/logout',function() {
  Auth::routes();
 
 Route::get('/dashboard-login',function() {
+    if(Auth::check()) {
+        return redirect()->route('home');
+    }
     return view('auth.login');
 });
 
@@ -77,25 +83,29 @@ Route::prefix('/admin/dashboard')->group(function($router){
 Route::get('/glogin','\App\Http\Controllers\GoogleDriveController@googleLogin')->name('glogin');
 Route::post('/upload-file','\App\Http\Controllers\GoogleDriveController@uploadFileUsingAccessToken');
 
-
-Route::get('/download-album/{id}',function($id) {
-    $album = \App\Models\AlbumImage::where('album_id',$id)->get();
-    foreach($album as $image) {
-        $filename = rand(1,111111111).'.jpg';
-        $tempImage = tempnam(sys_get_temp_dir(), $filename);
-        copy($image->photo, $tempImage);
-
-        return response()->download($tempImage, $filename);
-    }
-    return back();
-});
-
 Route::get('/getAlbumImages/{id}',function($id) {
+    if(! Auth::check()) {
+        return response(404);
+    }
+    $album = \App\Models\Album::where('id',$id)->where('user_id',auth()->user()->id)->first();
+    if($album == null) {
+        return response(404);
+    }
     return \App\Models\AlbumImage::where('album_id',$id)->select('id')->get()->pluck('id');
 });
 
 Route::get('/download-image/{id}',function($id) {
-
+    if(! Auth::check()) {
+        return response(404);
+    }
+    $image = \App\Models\AlbumImage::findOrFail($id);
+    if($image == null) {
+        return response(404);
+    }
+    $album = \App\Models\Album::where('id',$image->album_id)->where('user_id',auth()->user()->id)->first();
+    if($album == null) {
+        return response(404);
+    }
    $image = \App\Models\AlbumImage::findOrFail($id);
    return $image->photo;
 });

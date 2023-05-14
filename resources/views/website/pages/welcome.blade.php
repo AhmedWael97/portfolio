@@ -9,7 +9,11 @@
       </p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
         <a type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Explore My Work On Instagram</a>
-        <a href="{{ url('/web-login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+        @if(Auth::check())
+            <a href="{{ url('/profile') }}" class="btn btn-outline-secondary btn-lg px-4">My Profile</a>
+        @else
+            <a href="{{ url('/web-login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+        @endif
       </div>
     </div>
     <div class="overflow-hidden" style="max-height: 45vh;">
