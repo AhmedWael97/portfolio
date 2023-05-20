@@ -18,7 +18,7 @@
     </div>
     <div class="overflow-hidden" style="max-height: 45vh;">
       <div class="container px-5">
-        <img src="https://drive.google.com/uc?id=1PXdkr5CZw8lBiX-yq51U_B_w7GZvmBHg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+        <img src="https://drive.google.com/uc?id=1QMJIpQtAJb9SsE3_HojfIH3SErN4Y1A5" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
       </div>
     </div>
 </div>

@@ -36,6 +36,8 @@
                 {{ $album->name }}
             </button>
         </li>
+
+
         @endforeach
 
     </ul>
@@ -43,13 +45,12 @@
         @foreach(auth()->user()->albums as $key=>$album)
             <div class="tab-pane fade mt-2 {{ $key == 0 ? 'show active' : '' }}" id="tab-{{ $album->id }}" role="tabpanel" aria-labelledby="tab-{{ $album->id }}">
                 <p>
-                    <button type="button" album-id="{{ $album->id }}" class="btn btn-primary btn-sm downloadAlbum"> Download Album </button>
+                    <a href="{{ route('zip',$album->id) }}"  class="btn btn-primary btn-sm downloadAlbum"> Download Album </a>
                 </p>
                 @foreach($album->images as $image)
-                <a href="{{ $image->photo }}" data-fancybox data-caption="{{ $album->name }}">
-                    <img src="{{ $image->photo }}" style="width: auto; height:180px; margin:0.5px" />
-                </a>
-
+                    <a  href="{{ $image->photo }}" data-fancybox data-caption="{{ $album->name }}">
+                        <img src="{{ $image->photo }}" style="width: auto; height:180px; margin:0.5px" />
+                    </a>
                 @endforeach
             </div>
         @endforeach
@@ -61,35 +62,39 @@
 
 <script>
     $(document).ready(function() {
-        $('.downloadAlbum').click(function() {
-            var albumId = $(this).attr('album-id');
-            $('.downloadBar').css('display','block');
-            var url = "{{ url('/getAlbumImages') }}/" + albumId;
-            $.get(url,function(response){
-                $totalImages = response.length;
-                $('.progress-bar').css('width', '0%');
-                    $('.progress-bar').html('0%');
-                $.each(response,function(i,image) {
-                    var imageUrl = "{{ url('/download-image/') }}/" + image;
-                    var Counter = i+1;
-                    var Precentage = Counter * (100 / $totalImages);
+        // $('.downloadAlbum').click(function() {
+        //     var albumId = $(this).attr('album-id');
+        //     $('.downloadBar').css('display','block');
+        //     var url = "{{ url('/getAlbumImages') }}/" + albumId;
+        //     $.get(url,function(response){
+        //         $totalImages = response.length;
+        //         $('.progress-bar').css('width', '0%');
+        //             $('.progress-bar').html('0%');
+        //         $.each(response,function(i,image) {
+        //             var imageUrl = "{{ url('/download-image/') }}/" + image;
+        //             var Counter = i+1;
+        //             var Precentage = Counter * (100 / $totalImages);
 
-                    $('.progress-bar').css('width', Precentage + '%');
-                    $('.progress-bar').html(Precentage + '%');
-                    $.get(imageUrl,function(response) {
-                        var link = $('<a>').attr('href', url);
-                        link.attr('download', Math.floor(Math.random() * 10000) +'.jpg');
-                        $('body').append(link);
-                        link[0].click();
-                        link.remove();
-                    });
+        //             $('.progress-bar').css('width', Precentage + '%');
+        //             $('.progress-bar').html(Precentage + '%');
+        //             $.get(imageUrl,function(data) {
 
-                    $('.downloadBarTitle').html('Downloaded');
-                });
-            });
-        });
+
+        //             });
+
+        //             $('.downloadBarTitle').html('Downloaded');
+        //         });
+        //     });
+        // });
         Fancybox.bind("[data-fancybox]", {
-        // Your custom options
+            afterLoad: function() {
+                this.title = '<a href="' + this.href + '">Download</a> ' + this.title;
+            },
+            helpers : {
+                title: {
+                    type: 'inside'
+                }
+            }
         });
     });
 </script>

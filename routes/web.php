@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -101,7 +104,7 @@ Route::prefix('/admin/dashboard')->group(function($router){
 Route::get('/glogin','\App\Http\Controllers\GoogleDriveController@googleLogin')->name('glogin');
 Route::post('/upload-file','\App\Http\Controllers\GoogleDriveController@uploadFileUsingAccessToken');
 
-Route::get('/getAlbumImages/{id}',function($id) {
+Route::get('/getZipForAlbum/{id}',function($id) {
     if(! Auth::check()) {
         return response(404);
     }
@@ -109,8 +112,17 @@ Route::get('/getAlbumImages/{id}',function($id) {
     if($album == null) {
         return response(404);
     }
-    return \App\Models\AlbumImage::where('album_id',$id)->select('id')->get()->pluck('id');
-});
+
+    $zip = new ZipArchive();
+    $zipFileName = $album->name.'.zip';
+    $zip->open($zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    foreach ($album->images as $image) {
+        $contents = file_get_contents($image->photo);
+        $zip->addFromString(rand(1,100).'.jpeg', $contents);
+    }
+    $zip->close();
+    return response()->download($zipFileName)->deleteFileAfterSend();
+})->name('zip');
 
 Route::get('/download-image/{id}',function($id) {
     if(! Auth::check()) {
@@ -125,5 +137,12 @@ Route::get('/download-image/{id}',function($id) {
         return response(404);
     }
    $image = \App\Models\AlbumImage::findOrFail($id);
-   return $image->photo;
-});
+    //return $image->photo;
+    $file = file_get_contents($image->photo);
+
+    $headers = [
+        'Content-Type' => 'image/jpeg',
+        'Content-Disposition' => 'attachment; filename=image.jpg',
+    ];
+    return response($file, 200, $headers);
+})->name('download');
