@@ -31,14 +31,19 @@ Route::get('/web-login',function() {
 });
 
 Route::post('/login-post',function(Request $request) {
-    if(! $request->has('email') || ! $request->has('password')) {
+    if(! $request->has('phone') || ! $request->has('password')) {
         return back()->with('errors','Please Fill all inputs below');
     }
 
-    if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+    $user = User::where('phone',$request->phone)->first();
+    if($user == null) {
+        return back()->with('errors','Phone Number doesnot exists');
+    }
+
+    if(Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
         return redirect('/profile');
     } else {
-        return back()->with('errors','Email or password is incorrect');
+        return back()->with('errors','Phone or password is incorrect');
     }
 });
 

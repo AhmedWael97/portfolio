@@ -25,8 +25,8 @@
             </div>
         @endif
       <div class="form-floating">
-        <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
+        <input name="phone" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Phone Number</label>
       </div>
       <div class="form-floating">
         <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">

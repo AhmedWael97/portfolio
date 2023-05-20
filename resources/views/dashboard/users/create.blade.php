@@ -15,7 +15,7 @@
                 <form action="{{ route('user-store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                    
+
                         <div class="col-md-4">
                             <label>
                                 Client Name
@@ -34,12 +34,12 @@
                             </label>
                             <input type="date" name="session_date" class="form-control mb-2" required />
                         </div>
-                       
-                                
+
+
                         <div class="col-md-6">
                         <label for="">User Name </label>
                         <div class="input-group">
-                            <input type="text" name="email"class="form-control">
+                            <input type="text" name="email" class="form-control">
                             <div class="input-group-append">
                                 <span class="input-group-text">@refaatphotography.com</span>
                             </div>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         </div>
-      
+
                     </div>
                     <button class="btn btn-danger " type="submit">Submit</button>
                 </form>

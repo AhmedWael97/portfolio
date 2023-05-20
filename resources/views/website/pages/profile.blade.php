@@ -7,7 +7,7 @@
 />
 
 <div class="container mt-4">
-    <h1>Welcome, {{ auth()->user()->name }}</h1>
+    <h1>Welcome, {{ auth()->user()->name }}'s Family</h1>
     <a href="{{ url('/') }}" class="btn btn-primary">
         Home
     </a>
