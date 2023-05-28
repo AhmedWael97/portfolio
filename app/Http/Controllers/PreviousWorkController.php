@@ -9,9 +9,9 @@ class PreviousWorkController extends Controller
 {
     public function index(){
         $previous_works = previous_work::get();
-        return view('dashboard.previousWork.index')->with('previous_works',$previous_works);
+        return view('Dashboard.previousWork.index')->with('previous_works',$previous_works);
       }
-  
+
       public function store(Request $request){
           if($request->has('image')) {
               foreach ($request->file('image') as $imagefile) {
@@ -22,10 +22,10 @@ class PreviousWorkController extends Controller
                   $images->save();
               }
           }
-  
+
           return redirect()->route('latest-project-images')->with('success' ,'Images Uploaded Sucefully');
       }
-  
+
       public function delete($id){
           $latest_image = previous_work::where('id',$id)->first();
           $latest_image->delete();

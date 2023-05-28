@@ -9,7 +9,7 @@ class LatestProjectController extends Controller
 {
     public function index(){
       $latest_projects = latest_project::get();
-      return view('dashboard.latestProjectImages.index')->with('latest_projects',$latest_projects);
+      return view('Dashboard.latestProjectImages.index')->with('latest_projects',$latest_projects);
     }
 
     public function store(Request $request){

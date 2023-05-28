@@ -15,10 +15,10 @@ class AlbumController extends Controller
     }
 
     public function index() {
-        return view('dashboard.albums.index')->with('user_albums',Album::get());
+        return view('Dashboard.albums.index')->with('user_albums',Album::get());
     }
     public function create() {
-        return view('dashboard.albums.create')->with([
+        return view('Dashboard.albums.create')->with([
             'users' => User::get(),
         ]);
     }
@@ -75,7 +75,7 @@ class AlbumController extends Controller
     public function view($id) {
         $album = Album::where('id',$id)->first();
         $images = AlbumImage::where('album_id',$id)->get();
-        return view('dashboard.albums.view')->with([
+        return view('Dashboard.albums.view')->with([
             'images' => $images,
             'user' => User::where('id', $album->user_id)->first(),
             'album' => $album

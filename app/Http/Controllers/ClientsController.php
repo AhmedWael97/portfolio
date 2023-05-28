@@ -9,9 +9,9 @@ class ClientsController extends Controller
 {
     public function index(){
         $clients_section = clients::get();
-        return view('dashboard.clients.index')->with('clients_section',$clients_section);
+        return view('Dashboard.clients.index')->with('clients_section',$clients_section);
       }
-  
+
       public function store(Request $request){
           if($request->has('image')) {
               foreach ($request->file('image') as $imagefile) {
@@ -22,10 +22,10 @@ class ClientsController extends Controller
                   $images->save();
               }
           }
-  
+
           return redirect()->route('clients-section-images')->with('success' ,'Images Uploaded Sucefully');
       }
-  
+
       public function delete($id){
         $clients_section = clients::where('id',$id)->first();
         $clients_section->delete();
