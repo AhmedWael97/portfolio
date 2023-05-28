@@ -18,7 +18,7 @@ class LatestProjectController extends Controller
                 $images = new latest_project;
                 $imageName = time().'-'.$imagefile->getClientOriginalName();
                 $imagefile->move(public_path('latest_project'), $imageName);
-                $images->image = URL::asset('/latest_project').'/'.$imageName;
+                $images->image = URL::asset('/public/latest_project').'/'.$imageName;
                 $images->save();
             }
         }

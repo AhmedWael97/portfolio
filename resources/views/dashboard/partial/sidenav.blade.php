@@ -222,6 +222,21 @@
               </p>
             </a>
           </li>
+          
+          <li class="nav-item">
+            <a href="{{route('clients-section-images')}}" class="nav-link">
+            <i class="nav-icon fas fa-camera-retro"></i>
+              <p>
+                Clients Section Images
+                <span class="badge badge-info right">
+                <?php   
+                $images_no = count(\App\Models\clients::get());
+                ?>
+                {{$images_no}}
+                </span>
+              </p>
+            </a>
+          </li>
 
            <li class="nav-item">
             <a href="{{route('latest-project-images')}}" class="nav-link">

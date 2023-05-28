@@ -28,13 +28,7 @@
                             </label>
                             <input type="text" name="phone" class="form-control mb-2" required />
                         </div>
-                        <div class="col-md-4">
-                            <label>
-                                Session Date
-                            </label>
-                            <input type="date" name="session_date" class="form-control mb-2" required />
-                        </div>
-
+                       
 
                         <div class="col-md-6">
                         <label for="">User Name </label>

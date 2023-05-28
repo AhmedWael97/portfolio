@@ -18,7 +18,7 @@ class PreviousWorkController extends Controller
                   $images = new previous_work;
                   $imageName = time().'-'.$imagefile->getClientOriginalName();
                   $imagefile->move(public_path('previous_work'), $imageName);
-                  $images->image = URL::asset('/previous_work').'/'.$imageName;
+                  $images->image = URL::asset('/public/previous_work').'/'.$imageName;
                   $images->save();
               }
           }

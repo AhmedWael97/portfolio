@@ -15,11 +15,7 @@
                 <form action="{{ route('album-store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-12">
-                            <a href="{{ url('/glogin') }}">
-                                Sign In With Google Account
-                            </a>
-                        </div>
+                       
                         <div class="col-md-6">
                             <div class="form-group" data-select2-id="62">
                                 <label>Client Name</label>
@@ -43,12 +39,7 @@
                             </label>
                             <input type="date" name="date" class="form-control mb-2" required />
                         </div>
-                        <div class="col-lg-6">
-                            <label for="example-fileinput"
-                                class="form-label">Baby Images</label>
-                            <input type="file" id="example-fileinput" class="form-control" name="images[]"
-                                value="{{ old('images') }}" multiple>
-                        </div>
+                       
 
 
                     </div>

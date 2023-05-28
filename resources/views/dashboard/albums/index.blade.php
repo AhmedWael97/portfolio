@@ -35,7 +35,7 @@
                     <td>{{$album->user->phone}}</td>
                     <td>{{$album->date}}</td>
                     <td>
-                       <a href="{{route('album-view',['id'=> $album->id,'user_id'=>$album->user_id])}}" class="btn bg-pink"><i class="fas fa-images"></i> Open</a>     
+                       <a href="{{route('album-view',['id'=> $album->id])}}" class="btn bg-pink"><i class="fas fa-images"></i> Open</a>     
                        </td>
                       <td>
                         <a href="{{route('album-delete',$album->id )}}" class="btn btn-warning btn-sm"><i class="fas fa-trash"></i></a>     

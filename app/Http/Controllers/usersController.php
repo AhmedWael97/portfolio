@@ -63,7 +63,7 @@ class usersController extends Controller
         if(!User::where('email',$request->email)->where('id','!=',$request->id)->first()) {
             $user->name = $request->name;
             $user->phone = $request->phone;
-            $user->session_date = $request->session_date;
+           
             $user->email = $request->email;
             if($request->password != null) {
                 $user->password = Hash::make($request->password);

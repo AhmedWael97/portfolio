@@ -43,18 +43,17 @@
     </ul>
       <div class="tab-content" id="myTabContent">
         @foreach(auth()->user()->albums as $key=>$album)
-            <div class="tab-pane fade mt-2 {{ $key == 0 ? 'show active' : '' }}" id="tab-{{ $album->id }}" role="tabpanel" aria-labelledby="tab-{{ $album->id }}">
+            <div class="tab-pane fade mt-2 {{ $key == 0 ? 'show active' : '' }}" id="tab-{{$album->id}}" role="tabpanel" aria-labelledby="tab-{{ $album->id }}">
                 <p>
                     <a href="{{ route('zip',$album->id) }}"  class="btn btn-primary btn-sm downloadAlbum"> Download Album </a>
                 </p>
-                @foreach($album->images as $image)
-                    <a  href="{{ $image->photo }}" data-fancybox data-caption="{{ $album->name }}">
-                        <img src="{{ $image->photo }}" style="width: auto; height:180px; margin:0.5px" />
-                    </a>
-                @endforeach
+                <div class="content-id-{{$album->id}}"></div>
+
             </div>
         @endforeach
       </div>
+
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -62,30 +61,6 @@
 
 <script>
     $(document).ready(function() {
-        // $('.downloadAlbum').click(function() {
-        //     var albumId = $(this).attr('album-id');
-        //     $('.downloadBar').css('display','block');
-        //     var url = "{{ url('/getAlbumImages') }}/" + albumId;
-        //     $.get(url,function(response){
-        //         $totalImages = response.length;
-        //         $('.progress-bar').css('width', '0%');
-        //             $('.progress-bar').html('0%');
-        //         $.each(response,function(i,image) {
-        //             var imageUrl = "{{ url('/download-image/') }}/" + image;
-        //             var Counter = i+1;
-        //             var Precentage = Counter * (100 / $totalImages);
-
-        //             $('.progress-bar').css('width', Precentage + '%');
-        //             $('.progress-bar').html(Precentage + '%');
-        //             $.get(imageUrl,function(data) {
-
-
-        //             });
-
-        //             $('.downloadBarTitle').html('Downloaded');
-        //         });
-        //     });
-        // });
         Fancybox.bind("[data-fancybox]", {
             afterLoad: function() {
                 this.title = '<a href="' + this.href + '">Download</a> ' + this.title;
@@ -96,6 +71,48 @@
                 }
             }
         });
+
+
+
+        var tab_id = $('.active').attr("id");
+        values=tab_id.split('-');
+        one=values[0];
+        id=values[1];
+        if ($(".content-id-"+id).children("a").length > 0) {
+              console.log('Parent div has child divs');
+            } else {
+               $.get('{{ url("/") }}/get-albums-images/'+ id ,function(response){
+
+                  $('.content-id-'+id).html(response);
+              });
+            }
+
+
+
+        $('.nav-link').click(function(){
+        var tab_id = $('.active').attr("id");
+        values=tab_id.split('-');
+        one=values[0];
+        id=values[1];
+        if ($(".content-id-"+id).children("a").length > 0) {
+              console.log('Parent div has child divs');
+            } else {
+               $.get('{{ url("/") }}/get-albums-images/'+ id ,function(response){
+
+                  $('.content-id-'+id).html(response);
+              });
+            }
+
+        })
+
+
+        $('.downloadAlbum').click(function(){
+            var id = $(this).val();
+            $(this).text("Downloading your album ...");
+            $(this).prop('disabled', true);
+
+        });
+
     });
 </script>
 @endsection
