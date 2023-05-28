@@ -97,7 +97,7 @@
         if ($(".content-id-"+id).children("a").length > 0) {
               console.log('Parent div has child divs');
             } else {
-               $.get('{{ url("/") }}/get-albums-images/'+ id ,function(response){
+               $.get('{{ url("/api") }}/get-albums-images/'+ id ,function(response){
 
                   $('.content-id-'+id).html(response);
               });
