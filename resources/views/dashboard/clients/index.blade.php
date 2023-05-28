@@ -1,4 +1,4 @@
-@extends('dashboard.partial.layout')
+@extends('Dashboard.partial.layout')
 @section('content')
 
 <section class="content">
@@ -8,12 +8,12 @@
               <div class="card">
               <div class="card-header">
                 <h3 class="card-title">All Clients Section Images </h3>
-              
+
                 <a type="button" class="btn bg-lightblue color-palette btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
                    Add New Image
                 </a>
-             
-           
+
+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -31,7 +31,7 @@
                     <td>{{++$key}}</td>
                     <td><img src="{{$client_section->image}}" alt="" style="width:100px;height:100px;"></td>
                       <td>
-                        <a href="{{route('delete-clients-images',$client_section->id )}}" class="btn btn-warning btn-sm"><i class="fas fa-trash"></i></a>     
+                        <a href="{{route('delete-clients-images',$client_section->id )}}" class="btn btn-warning btn-sm"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
                     @endforeach

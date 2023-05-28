@@ -1,4 +1,4 @@
-@extends('dashboard.partial.layout')
+@extends('Dashboard.partial.layout')
 @section('content')
 <section class="content mt-2">
    <div class="container-fluid">
@@ -28,7 +28,7 @@
                             </label>
                             <input type="text" name="phone" class="form-control mb-2" required />
                         </div>
-                       
+
 
                         <div class="col-md-6">
                         <label for="">User Name </label>

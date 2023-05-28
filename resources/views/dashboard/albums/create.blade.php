@@ -1,4 +1,4 @@
-@extends('dashboard.partial.layout')
+@extends('Dashboard.partial.layout')
 @section('content')
 <section class="content mt-2">
    <div class="container-fluid">
@@ -15,7 +15,7 @@
                 <form action="{{ route('album-store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                       
+
                         <div class="col-md-6">
                             <div class="form-group" data-select2-id="62">
                                 <label>Client Name</label>
@@ -39,7 +39,7 @@
                             </label>
                             <input type="date" name="date" class="form-control mb-2" required />
                         </div>
-                       
+
 
 
                     </div>

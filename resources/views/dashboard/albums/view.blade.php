@@ -1,4 +1,4 @@
-@extends('dashboard.partial.layout')
+@extends('Dashboard.partial.layout')
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" />
 <section class="content mt-2">
@@ -8,12 +8,12 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                <i class="fas fa-baby"></i> All Photos For Album : {{$user->name}}             
+                <i class="fas fa-baby"></i> All Photos For Album : {{$user->name}}
                 </h3>
               </div>
 
               <div class="card-body">
-                  
+
             <div class="col-md-12">
                 <p>
                     Upload Images
@@ -58,7 +58,7 @@
 @endsection
 
 @section('script')
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 <script>
    $(document).ready(function(){
@@ -67,7 +67,7 @@
         // Limit upload size to 2 MB
         acceptedFiles: ".jpeg,.jpg,.png,.gif", // Only allow certain file types
         addRemoveLinks: true // Show remove button to delete uploaded files
-    }); 
+    });
    });
 </script>
 @endsection

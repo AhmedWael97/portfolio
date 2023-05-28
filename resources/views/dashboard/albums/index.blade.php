@@ -1,4 +1,4 @@
-@extends('dashboard.partial.layout')
+@extends('Dashboard.partial.layout')
 @section('content')
 
 <section class="content">
@@ -8,11 +8,11 @@
               <div class="card">
               <div class="card-header">
                 <h3 class="card-title">All Users Albums </h3>
-              
+
                 <a href="{{ route('album-create') }}" class="btn bg-lightblue color-palette btn-sm float-right">
                    Send a New Album For User
                 </a>
-           
+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -35,13 +35,13 @@
                     <td>{{$album->user->phone}}</td>
                     <td>{{$album->date}}</td>
                     <td>
-                       <a href="{{route('album-view',['id'=> $album->id])}}" class="btn bg-pink"><i class="fas fa-images"></i> Open</a>     
+                       <a href="{{route('album-view',['id'=> $album->id])}}" class="btn bg-pink"><i class="fas fa-images"></i> Open</a>
                        </td>
                       <td>
-                        <a href="{{route('album-delete',$album->id )}}" class="btn btn-warning btn-sm"><i class="fas fa-trash"></i></a>     
+                        <a href="{{route('album-delete',$album->id )}}" class="btn btn-warning btn-sm"><i class="fas fa-trash"></i></a>
                       </td>
-                      
-                   
+
+
                     </tr>
                     @endforeach
                   </tbody>
