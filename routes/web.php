@@ -38,7 +38,7 @@ Route::get('make-me-read/{id}',function($id){
     if(File::exists( public_path($notif->data['path']) )) {
         File::delete(public_path($notif->data['path']));
     }
-
+    
     $notif->delete();
     return [
         "data" => view('website.pages.notifications')->render(),

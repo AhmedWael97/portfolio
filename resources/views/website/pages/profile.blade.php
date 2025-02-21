@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         #progress-container {
             width: 100%;
@@ -44,7 +47,13 @@
 
         </div>
 
-        <div class="not-cont">
+        <div class="alert alert-info finished d-none">
+
+            Your file is ready now, please open notification and click on first element, download will start
+
+        </div>
+
+        <div class="not-cont ">
             @include('website.pages.notifications')
         </div>
         <br />
@@ -166,8 +175,12 @@
                             var data = response['data'];
                             $('.not-cont').empty();
                             $('.not-cont').html(data);
+                            $('.not-cont').addClass('animate__bounceIn');
+                            $('.success').addClass('d-none');
+                            $('.finished').removeClass('d-none');
+                            $('.finished').addClass('animate__bounceIn');
                             clearInterval(noti_checker);
-                        } 
+                        }
                     });
                 }, 5000);
             }
