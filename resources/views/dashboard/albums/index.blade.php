@@ -31,8 +31,8 @@
                   @foreach($user_albums as $album)
                     <tr>
                     <td>{{$album->id}}</td>
-                    <td>{{$album->user->name}}</td>
-                    <td>{{$album->user->phone}}</td>
+                    <td>{{$album->user?->name}}</td>
+                    <td>{{$album->user?->phone}}</td>
                     <td>{{$album->date}}</td>
                     <td>
                        <a href="{{route('album-view',['id'=> $album->id])}}" class="btn bg-pink"><i class="fas fa-images"></i> Open</a>

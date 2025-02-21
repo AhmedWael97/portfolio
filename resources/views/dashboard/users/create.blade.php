@@ -40,12 +40,31 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                        <div class="form-group">
+                            <div class="form-group">
                                 <label for="password">Password</label>
                                 <input name="password" type="password"  class="form-control" placeholder="Enter Password">
                                 <small class="text-danger">**password must be more thank 8 character</small>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input name="price" type="text"  class="form-control" placeholder="Enter price">
+                            </div>
+                        </div>
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Session Date</label>
+                                <input name="date" type="date"  class="form-control" placeholder="Ente date">
+                            </div>
+                        </div>
+                      
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Note </label>
+                            <div class="input-group">
+                                <textarea name="note" class="form-control"></textarea>
+                            </div>
                         </div>
 
                     </div>

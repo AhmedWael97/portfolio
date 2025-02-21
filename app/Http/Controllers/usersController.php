@@ -16,11 +16,11 @@ class usersController extends Controller
 
     public function index() {
         $users = User::get();
-        return view('dashboard.users.index')->with(['users'=> $users]);
+        return view('Dashboard.users.index')->with(['users'=> $users]);
     }
 
     public function create() {
-        return view('dashboard.users.create');
+        return view('Dashboard.users.create');
     }
 
     public function store(Request $request) {
@@ -36,6 +36,9 @@ class usersController extends Controller
         $newUser = new User();
         $newUser->name = $request->name;
         $newUser->phone = $request->phone;
+        $newUser->note = $request->note;
+        $newUser->price = $request->price;
+        $newUser->date = $request->date;
         //$newUSer->session_date = $request->session_date;
         $newUser->password = Hash::make($request->password);
         $newUser->email = $request->email.'@refaatphotography.com';
@@ -46,7 +49,7 @@ class usersController extends Controller
 
     public function edit($id) {
         $user = User::findOrFail($id);
-        return view('dashboard.users.update')->with([
+        return view('Dashboard.users.update')->with([
             'user' => $user,
         ]);
     }
@@ -63,7 +66,9 @@ class usersController extends Controller
         if(!User::where('email',$request->email)->where('id','!=',$request->id)->first()) {
             $user->name = $request->name;
             $user->phone = $request->phone;
-           
+            $user->note = $request->note;
+            $user->price = $request->price;
+            $user->date = $request->date;
             $user->email = $request->email;
             if($request->password != null) {
                 $user->password = Hash::make($request->password);

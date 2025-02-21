@@ -21,7 +21,7 @@
                                 <label>Client Name</label>
                                 <select class="form-control select2 select2-hidden-accessible" name="user_id"style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" >{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}" > {{$user->id}} - {{ $user->name }}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -35,7 +35,7 @@
 
                         <div class="col-md-6">
                             <label>
-                                Data Of Session
+                                Date Of Session
                             </label>
                             <input type="date" name="date" class="form-control mb-2" required />
                         </div>

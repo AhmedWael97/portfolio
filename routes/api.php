@@ -14,8 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/get-albums-images/{id}' , '\App\Http\Controllers\HomeController@fetch_albums_images');
+Route::get('/get-albums-images/{id}' , function($id) {
+     $album_images= \App\Models\AlbumImage::where('album_id',$id)->with('album')->get();
+        $images = [];
+        foreach($album_images as $image) {
+            $image = '<img src="'. $image->photo .'" style="width: auto; height:200px; margin-left:20px; margin-bottom:20px" />';
+
+            array_push($images,$image);
+        }
+
+        return response()->json( $images );
+});

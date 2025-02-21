@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\ZipExtractor;
 use ZipArchive;
 class GoogleDriveController extends Controller
 {
@@ -122,11 +123,20 @@ class GoogleDriveController extends Controller
 
             $service->permissions->create($result->id, $permission);
             // get url of uploaded file
-            return 'https://drive.google.com/uc?id='.$result->id;
+            return 'https://lh3.googleusercontent.com/d/'.$result->id;
 
 
         }
         public function downloadFileUsingAccessToken($album_id) {
+            
+            
+            ZipExtractor::dispatch($album_id, $this->gClient);
+
+            return 'Zip creating now .. you will notify after it finished';
+
+        }
+
+        public function retriveTotalFilesFromFolder($folderId) {
             $service = new \Google_Service_Drive($this->gClient);
             $user= \App\Models\User::find(1);
             $this->gClient->setAccessToken(json_decode($user->access_token,true));
@@ -146,37 +156,9 @@ class GoogleDriveController extends Controller
                 $user->access_token=$updatedAccessToken;
                 $user->save();
             }
-            
-           
-            $album = \App\Models\Album::findOrFail($album_id);
-            $folder = json_decode($album->folder);
-            
-                        // Set the folder ID
-            $folderId =  $folder->id;
-            
-            // Set the query to search for files in the folder
-            $query = "parents='$folderId' and trashed=false";
-            
-            // Get the files in the folder
-            $files = $service->files->listFiles([
-                'q' => $query
-            ]);
-            
-             $zip = new ZipArchive();
-            $zipFileName = $album->name.'.zip';
-            $zip->open($zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-            // Loop through the files and download each one
-            foreach ($files as $file) {
-                // Download the file contents
-                $fileContents = $service->files->get($file->getId(), [
-                    'alt' => 'media'
-                ])->getBody()->getContents();
-            
-                 $zip->addFromString(rand(1,100).'.jpeg', $fileContents);
-            }
-            
-             $zip->close();
-            return response()->download($zipFileName)->deleteFileAfterSend();
-            
+            return $service->files->listFiles(array(
+                'q' => "'$folderId' in parents"
+            ))->getFiles();
         }
+
 }

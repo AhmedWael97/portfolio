@@ -23,6 +23,9 @@
                     <th>Name</th>
                     <th>Mobil No.</th>
                     <th>Email</th>
+                    <th>Note</th>
+                    <th>Price</th>
+                    <th>date</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -33,6 +36,9 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->phone}}</td>
                     <td>{{$user->email}}</td>
+                    <td>{{$user->note}}</td>
+                    <td>{{$user->price}}</td>
+                    <td>{{$user->date}}</td>
                       <td>
 
                         <a href="{{route('user-edit',$user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

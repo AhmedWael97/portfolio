@@ -18,8 +18,18 @@
                 <p>
                     Upload Images
                 </p>
-                <form action="{{ route('upload-images',$album->id) }}" method="POST" enctype="multipart/form-data" class="dropzone">
+                {{-- <form action="{{ route('upload-images',$album->id) }}" method="POST" enctype="multipart/form-data" class="dropzone">
                     @csrf
+                </form> --}}
+
+                <form action="{{ route('upload-image-using-drive') }}" method="post">
+                    @csrf
+                    <label>
+                        Folder Id
+                    </label>
+                    <input type="hidden" name="album_id" value="{{ $album->id }}" />
+                    <input type="text" name="folder_id" />
+                    <input type="submit" />
                 </form>
             </div>
             <hr />

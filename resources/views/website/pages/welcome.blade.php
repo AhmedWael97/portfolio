@@ -18,7 +18,10 @@
     </div>
     <div class="overflow-hidden" style="max-height: 45vh;">
       <div class="container px-5">
-        <img src="https://drive.google.com/uc?id=1QMJIpQtAJb9SsE3_HojfIH3SErN4Y1A5" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+          
+        
+
+        <img src="https://lh3.googleusercontent.com/d/1QMJIpQtAJb9SsE3_HojfIH3SErN4Y1A5" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
       </div>
     </div>
 </div>
@@ -28,7 +31,7 @@
     <div class="mt-4">
         <div class="row p-0 m-0">
                @foreach($previous_works as $previous_work)
-               <div class="col-md-3 mb-4">
+               <div class="col-xs-6 col-sm-6 col-md-3 mb-4">
                 <div  style="overflow: hidden; justify-content:center; display:flex">
                     <img style="max-width:100%; height:auto" src="{{ $previous_work->image}}" class="card-img-top shadow-sm" alt="...">
                 </div>
@@ -46,11 +49,14 @@
             <br>
             I’m Refaat Newborn Photographer 
 
-I graduated from the Faculty of Art Education and a member of the Syndicate of Fine Artists
+I graduated from the Faculty of Art Education and a member of the Syndicate of Fine Artists.
+<br>
 
 As a photographer, my mission is to help you celebrate your life with natural photography that captures memories for you and your loved ones to share and cherish over the years.
+<br>
 
 My style is natural, fresh, and photojournalistic.
+<br>
 
 Thank you so much for stopping by and please feel free to contact me with any questions you might have.
           </p>
@@ -70,17 +76,17 @@ Thank you so much for stopping by and please feel free to contact me with any qu
         $albums_no = 300+ App\Models\Album::count();
         ?>
                @foreach($clients_images as $clients_image)
-                <div class="col-md-1 mb-4">
-                    <div  style="overflow: hidden; justify-content:center; display:flex;border-radius:50%;height:100px;width:100px;">
-                        <img style="max-width:100%; height:auto;" src="{{ $clients_image->image}}" class="card-img-top shadow-sm" alt="...">
+                <div class="col col-xs-6 col-sm-6 col-md-1 col-lg-1 mb-4">
+                    <div  style="overflow: hidden; justify-content:center; display:flex;border-radius:50%;height:100px;width:100px">
+                        <img style="max-width:100%; height:auto; margin:auto" src="{{ $clients_image->image}}" class="card-img-top shadow-sm" alt="...">
                     </div>
                     
 
                 </div>
                
                @endforeach
-               <div class="col-md-1 mb-4">
-               <div class="row position-relative" style="overflow: hidden; justify-content:center; display:flex;border-radius:50%;height:100px;width:100px;">
+               <div class="col col-xs-6 col-sm-6 col-md-1 col-lg-1 mb-4">
+               <div class="row position-relative" style="overflow: hidden; justify-content:center; display:flex;border-radius:50%;height:100px;width:100px">
                <div class="col position-absolute" style="width:100%;height:100%;background-color:rgba(0,0,0,0.7);color:white;padding:20px 5px;font-weight:bold;font-size:25px;font-family: 'Kaushan Script', cursive;"><p style="margin-top:11px;">+{{$albums_no}}</p></div>
     </div>
                </div>

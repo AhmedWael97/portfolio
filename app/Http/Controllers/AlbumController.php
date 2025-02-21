@@ -65,6 +65,24 @@ class AlbumController extends Controller
                 $albumImage->save();
     }
 
+
+    public function saveImages(Request $request) {
+        $drive  = new \App\Http\Controllers\GoogleDriveController();
+        $files = $drive->retriveTotalFilesFromFolder($request->folder_id);
+        $album = Album::where('id',$request->album_id)->first();
+        $album->folder = $request->folder_id;
+        $album->save();
+        foreach($files as $file) {
+            $albumImage = new AlbumImage();
+            $albumImage->photo = 'https://lh3.googleusercontent.com/d/'.$file->id;
+            $albumImage->album_id = $album->id;
+            $albumImage->thumbnail = '';
+            $albumImage->save();
+        }
+
+        return back()->with('sucess','Saved Successfully');
+    }
+
     public function deleteImage($id) {
         $image = AlbumImage::findOrFail($id);
         $image->delete();
